@@ -1,0 +1,45 @@
+﻿@model OnlineShoppingMVC.Models.Order
+
+<h2>Order Details - Order #@Model.Id</h2>
+<p><strong>Order Date:</strong> @Model.OrderDate.ToString("dd/MM/yyyy")</p>
+<p><strong>Total Amount:</strong> ₱@Model.TotalAmount.ToString("N2")</p>
+<p><strong>Status:</strong> @Model.Status</p>
+
+<h3>Purchased Items</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.OrderItems != null && Model.OrderItems.Any())
+        {
+            @foreach (var item in Model.OrderItems)
+            {
+                <tr>
+                    <td>@(item.Product?.Name ?? "N/A")</td> 
+                    <td>
+                        <img src="@(item.Product?.ImagePath ?? "/images/default-product.jpg")"
+                             alt="Product Image" width="150" />
+                    </td>
+                    <td>₱@item.Price.ToString("N2")</td>
+                    <td>@item.Quantity</td>
+                    <td>₱@(item.Price * item.Quantity).ToString("N2")</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5" class="text-center">No items found for this order.</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="@Url.Action("Index", "Order")" class="btn btn-secondary">Back to Orders</a>

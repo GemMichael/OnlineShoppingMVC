@@ -1,0 +1,15 @@
+﻿@model OnlineShoppingMVC.Models.Product
+
+@if (Model == null)
+{
+    <h2 class="text-danger">Product not found</h2>
+    <a href="/Products/PublicIndex" class="btn btn-primary">Back to Products</a>
+}
+else
+{
+    <h2>@Model.Name</h2>
+    <p>@Model.Description</p>
+    <p>Price: @Model.Price.ToString("C")</p>
+    <img src="@Model.ImagePath" alt="@Model.Name" width="200" />
+    <a href="/Products/PublicIndex" class="btn btn-secondary">Back to Products</a>
+}

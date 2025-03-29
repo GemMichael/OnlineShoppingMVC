@@ -1,0 +1,38 @@
+﻿@model OnlineShoppingMVC.Models.CheckoutViewModel
+
+<form asp-controller="Cart" asp-action="ProcessPayment" method="post">
+    @if (ViewBag.SelectedItems != null)
+    {
+        foreach (var item in (List<OnlineShoppingMVC.Models.CartItem>)ViewBag.SelectedItems)
+        {
+            <input type="hidden" name="selectedItems" value="@item.Id" />
+        }
+    }
+
+    <div>
+        <label>Cardholder Name:</label>
+        <input asp-for="CardholderName" class="form-control" required />
+        <span asp-validation-for="CardholderName" class="text-danger"></span>
+    </div>
+    <div>
+        <label>Card Number:</label>
+        <input asp-for="CardNumber" class="form-control" required placeholder="1234 5678 9012 3456" />
+        <span asp-validation-for="CardNumber" class="text-danger"></span>
+    </div>
+    <div>
+        <label>Expiration Date:</label>
+        <input asp-for="ExpiryDate" class="form-control" required placeholder="MM/YY" />
+        <span asp-validation-for="ExpiryDate" class="text-danger"></span>
+    </div>
+    <div>
+        <label>CVV:</label>
+        <input asp-for="CVV" class="form-control" required placeholder="123" />
+        <span asp-validation-for="CVV" class="text-danger"></span>
+    </div>
+    <div>
+        <label>Total Amount:</label>
+        <input type="text" value="@Model.TotalAmount" readonly class="form-control" />
+    </div>
+    <br>
+    <button type="submit" class="btn btn-success">Pay Now</button>
+</form>

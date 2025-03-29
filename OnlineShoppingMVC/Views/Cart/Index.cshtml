@@ -1,0 +1,55 @@
+﻿<form asp-controller="Cart" asp-action="CheckoutSelected" method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Select</th>
+                <th>Product</th>
+                <th>Image</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" name="selectedItems" value="@item.Id" />
+                    </td>
+                    <td>
+                        @if (item.Product != null)
+                        {
+                            @item.Product.Name
+                        }
+                        else
+                        {
+                            <span class="text-danger">Product Not Found</span>
+                        }
+                    </td>
+                    <td>
+                        @if (item.Product?.ImagePath != null)
+                        {
+                            <img src="@item.Product.ImagePath" width="50" height="50" />
+                        }
+                        else
+                        {
+                            <span>No Image</span>
+                        }
+                    </td>
+                    <td>@(item.Product?.Price.ToString("C") ?? "N/A")</td>
+                    <td>@item.Quantity</td>
+                    <td>@((item.Quantity * (item.Product?.Price ?? 0)).ToString("C"))</td>
+                    <td>
+                        <form method="post" asp-action="RemoveFromCart">
+                            <input type="hidden" name="cartItemId" value="@item.Id" />
+                            <button type="submit" class="btn btn-danger">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary">Proceed to Checkout</button>
+</form>

@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Product>
+
+<h2 class="text-center mb-4">Available Products</h2>
+
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="@product.ImagePath" class="card-img-top" alt="@product.Name" style="height: 250px; object-fit: cover;" />
+                <div class="card-body">
+                    <h5 class="card-title">@product.Name</h5>
+                    <p class="card-text">@product.Description</p>
+                    <p class="card-text font-weight-bold">Price: $@product.Price</p>
+
+                    <!-- Add to Cart Form -->
+                    <form asp-controller="Cart" asp-action="AddToCart" method="post">
+                        <input type="hidden" name="productId" value="@product.Id" />
+                        <div class="mb-3">
+                            <label for="quantity" class="form-label">Quantity</label>
+                            <input type="number" name="quantity" class="form-control" value="1" min="1" id="quantity" />
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>

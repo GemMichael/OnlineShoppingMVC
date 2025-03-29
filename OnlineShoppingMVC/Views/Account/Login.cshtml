@@ -1,0 +1,17 @@
+﻿@model LoginViewModel
+
+<h2 class="text-center my-4">Login</h2>
+
+<form asp-action="Login" method="post" class="w-50 mx-auto p-4 border rounded shadow">
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label">Email</label>
+        <input asp-for="Email" class="form-control" placeholder="Enter your email" required />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Password" class="form-label">Password</label>
+        <input asp-for="Password" type="password" class="form-control" placeholder="Enter your password" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Login</button>
+</form>

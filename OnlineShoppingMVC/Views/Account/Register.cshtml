@@ -1,0 +1,48 @@
+﻿@model RegisterViewModel
+
+<h2 class="mb-4">Register</h2>
+
+<form asp-action="Register" method="post" class="needs-validation" novalidate>
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label">Email</label>
+        <input asp-for="Email" class="form-control" placeholder="Enter your email" required />
+        <div class="invalid-feedback">Please enter a valid email.</div>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Password" class="form-label">Password: Use at least 8 characters, including a number and a special character.</label>
+        <input asp-for="Password" type="password" class="form-control" placeholder="Enter your password" required />
+        <div class="invalid-feedback">Password is required.</div>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Address" class="form-label">Address</label>
+        <input asp-for="Address" class="form-control" placeholder="Enter your address" required />
+        <div class="invalid-feedback">Please enter your address.</div>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Phone" class="form-label">Phone</label>
+        <input asp-for="Phone" class="form-control" placeholder="Enter your phone number" required />
+        <div class="invalid-feedback">Please enter your phone number.</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Register</button>
+</form>
+
+<script>
+    // Bootstrap form validation
+    (function () {
+        'use strict';
+        var forms = document.querySelectorAll('.needs-validation');
+        Array.prototype.slice.call(forms).forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();
+</script>
